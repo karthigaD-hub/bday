@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Ammamma 🎂</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',sans-serif;
+}
+
+body{
+    background:linear-gradient(135deg,#ff9a9e,#fecfef);
+    text-align:center;
+    overflow:hidden;
+    color:white;
+}
+
+/* COMMON PAGE STYLE */
+.page{
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+}
+
+.hidden{ display:none; }
+
+button{
+    padding:15px 30px;
+    font-size:18px;
+    border:none;
+    border-radius:30px;
+    background:white;
+    color:#ff1493;
+    margin-top:30px;
+    cursor:pointer;
+    transition:0.4s;
+}
+
+button:hover{
+    transform:scale(1.1);
+    background:#ff1493;
+    color:white;
+}
+
+/* SLIDESHOW */
+.slideshow img{
+    width:280px;
+    height:280px;
+    border-radius:20px;
+    box-shadow:0 10px 20px rgba(0,0,0,0.3);
+    object-fit:cover;
+    transition:opacity 1s ease-in-out;
+}
+
+/* FINAL PAGE */
+#finalPage{
+    background:black;
+    position:relative;
+}
+
+.fullscreen-img{
+    width:90%;
+    max-width:500px;
+    border-radius:20px;
+    box-shadow:0 0 30px rgba(255,255,255,0.6);
+    animation:zoom 6s infinite alternate;
+}
+
+@keyframes zoom{
+    from{transform:scale(1);}
+    to{transform:scale(1.08);}
+}
+
+/* ENVELOPE */
+.envelope{
+    font-size:60px;
+    cursor:pointer;
+    margin-top:30px;
+    animation:bounce 1.5s infinite;
+}
+
+@keyframes bounce{
+    0%,100%{transform:translateY(0);}
+    50%{transform:translateY(-15px);}
+}
+
+/* LETTER MODAL */
+#letterModal{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.9);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    padding:30px;
+    opacity:0;
+    visibility:hidden;
+    transition:1s;
+}
+
+#letterModal.show{
+    opacity:1;
+    visibility:visible;
+}
+
+.letter-content{
+    background:white;
+    color:#333;
+    padding:30px;
+    border-radius:20px;
+    max-width:700px;
+    font-size:1.3rem;
+    line-height:2;
+    animation:fadeIn 2s;
+}
+
+@keyframes fadeIn{
+    from{opacity:0; transform:scale(0.8);}
+    to{opacity:1; transform:scale(1);}
+}
+
+/* HEARTS */
+.heart{
+    position:fixed;
+    bottom:-10px;
+    font-size:20px;
+    animation:float 5s linear infinite;
+}
+
+@keyframes float{
+    0%{transform:translateY(0);opacity:1;}
+    100%{transform:translateY(-800px);opacity:0;}
+}
+</style>
+</head>
+
+<body>
+
+<!-- PAGE 1 -->
+<div id="page1" class="page">
+    <h1>🎂 இனிய பிறந்தநாள் வாழ்த்துக்கள் அம்மம்மா 🎂</h1>
+    <button onclick="openPage2()">அன்பு நிறைந்த சர்ப்ரைஸ் 💖</button>
+</div>
+
+<!-- PAGE 2 -->
+<div id="page2" class="page hidden">
+    <h2>💐 என் அன்பு அம்மம்மாவிற்கு 💐</h2>
+
+    <div class="slideshow">
+        <img id="slide" src="photo1.jpg">
+    </div>
+
+    <button onclick="goToFinal()">🎵 Music & Image Surprise</button>
+</div>
+
+<!-- FINAL PAGE -->
+<div id="finalPage" class="page hidden">
+    <img id="finalSlide" class="fullscreen-img" src="photo1.jpg">
+    <div id="envelope" class="envelope hidden" onclick="openLetter()">✉️</div>
+</div>
+
+<!-- LETTER MODAL -->
+<div id="letterModal">
+    <div class="letter-content">
+        💌 அன்பான அம்மம்மாவிற்கு 💌 <br><br>
+
+        இந்த வாழ்க்கையில் நீங்கள் இருப்பது எங்களுக்கு ஒரு மிகப்பெரிய வரம் 🙏 <br><br>
+
+        உங்கள் அன்பு இல்லாமல் எங்கள் வாழ்க்கை முழுமையில்லை ❤️ <br>
+        உங்கள் சிரிப்பு எங்கள் வீட்டின் ஒளி ✨ <br><br>
+
+        எங்களை இப்படிப் பார்த்து, கவனித்து,  
+        எப்போதும் அன்பு கொடுத்ததற்கு நன்றி 💖 <br><br>
+
+        நீங்கள் எங்கள் வாழ்க்கையில் இருப்பதற்கு  
+        நாங்கள் மிகவும் அதிர்ஷ்டசாலிகள் 💕 <br><br>
+
+        நீண்ட ஆயுளுடன் ஆரோக்கியமாக  
+        எப்போதும் சந்தோஷமாக இருக்கணும் 🙏✨ <br><br>
+
+        ❤️ Thank You Ammamma ❤️
+    </div>
+</div>
+
+<audio id="music" loop>
+    <source src="birthday.mp3" type="audio/mp3">
+</audio>
+
+<script>
+
+/* PAGE NAVIGATION */
+function openPage2(){
+    document.getElementById("page1").classList.add("hidden");
+    document.getElementById("page2").classList.remove("hidden");
+    startHearts();
+}
+
+function goToFinal(){
+    document.getElementById("music").play();
+    document.getElementById("page2").classList.add("hidden");
+    document.getElementById("finalPage").classList.remove("hidden");
+
+    startFinalSlideshow();
+}
+
+/* SLIDESHOW PAGE 2 */
+let images=["photo1.jpg","photo2.jpg","photo3.jpg","photo4.jpg","photo5.jpg","photo6.jpg","photo7.jpg","photo8.jpg","photo9.jpg","photo10.jpg"];
+let index=0;
+let slide=document.getElementById("slide");
+
+setInterval(function(){
+    slide.style.opacity=0;
+    setTimeout(function(){
+        index=(index+1)%images.length;
+        slide.src=images[index];
+        slide.style.opacity=1;
+    },500);
+},2500);
+
+/* FINAL SLIDESHOW WITH ENVELOPE */
+function startFinalSlideshow(){
+    let finalIndex=0;
+    let finalSlide=document.getElementById("finalSlide");
+
+    let slideshow=setInterval(function(){
+        finalIndex++;
+        if(finalIndex>=images.length){
+            clearInterval(slideshow);
+            document.getElementById("envelope").classList.remove("hidden");
+        }else{
+            finalSlide.src=images[finalIndex];
+        }
+    },3000);
+}
+
+/* OPEN LETTER */
+function openLetter(){
+    document.getElementById("letterModal").classList.add("show");
+}
+
+/* HEARTS */
+function startHearts(){
+    setInterval(function(){
+        let heart=document.createElement("div");
+        heart.className="heart";
+        heart.innerHTML="❤️";
+        heart.style.left=Math.random()*100+"vw";
+        document.body.appendChild(heart);
+        setTimeout(()=>heart.remove(),5000);
+    },400);
+}
+
+</script>
+
+</body>
+</html>
